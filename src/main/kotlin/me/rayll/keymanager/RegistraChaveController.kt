@@ -1,5 +1,6 @@
 package me.rayll.keymanager
 
+import io.micronaut.context.annotation.Value
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -30,5 +31,5 @@ class RegistraChaveController(
     }
 
     private fun location(clientId: String, pixId: String) = HttpResponse
-        .uri("/api/v1/clientes/$clientId/pix/${pixId}")
+        .uri("/api/v1/clientes/${pixId}")
 }

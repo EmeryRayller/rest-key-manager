@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "rest-key-manager.fullname" . }}
+    annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+  labels:
+    {{- include "rest-key-manager.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "rest-key-manager.selectorLabels" . | nindent 4 }}

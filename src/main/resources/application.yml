@@ -16,3 +16,6 @@ grpc:
 jackson:
   serialization:
     writeDatesAsTimestamps: false
+
+controller:
+  endpoint: '${CONTROLLER_ENDPOINT:/api/v1/clientes}'
