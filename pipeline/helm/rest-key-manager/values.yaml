@@ -82,5 +82,5 @@ tolerations: []
 affinity: {}
 
 application:
-  KEY_MANAGER_HOST: public.ecr.aws/i2c7a5l2/rayller-ot5-key-manager-rest
-  KEY_MANAGER_PORT: 80
+  KEY_MANAGER_HOST: public.ecr.aws/i2c7a5l2/rayller-ot5-key-manager
+  KEY_MANAGER_PORT: 50051
