@@ -29,18 +29,18 @@ phases:
       - echo Building the Docker image...  
       - docker image ls
       - docker build -t $DEPLOYMENT_NAME . 
-      - docker tag $DEPLOYMENT_NAME:$IMAGE_TAG $URL_REPO/$DEPLOYMENT_NAME:$IMAGE_TAG
+      - docker tag $DEPLOYMENT_NAME:$IMAGE_TAG $URL_REPO:$IMAGE_TAG
       - docker image ls
       - echo Build completed on `date`  
 
   post_build:
     commands:
       - echo Pushing in to Amazon ECR...
-      - docker push $URL_REPO/$DEPLOYMENT_NAME:$IMAGE_TAG
+      - docker push $URL_REPO:$IMAGE_TAG
       - echo Push completed on `date`  
       - echo deploying to cluster...
       - helm version --short
-      - helm lint pipeline/helm/$DEPLOYMENT_NAME --values pipeline/helm/$DEPLOYMENT_NAME/values.yaml
+      - helm lint pipeline/helm/rest-key-manager --values pipeline/helm/rest-key-manager/values.yaml
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --role-arn $ARN_ROLE
       - kubectl get nodes
-      - helm upgrade -i $DEPLOYMENT_NAME pipeline/helm/$DEPLOYMENT_NAME/ --values pipeline/helm/$DEPLOYMENT_NAME/values.yaml
+      - helm upgrade -i $DEPLOYMENT_NAME pipeline/helm/rest-key-manager/ --values pipeline/helm/rest-key-manager/values.yaml
